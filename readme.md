@@ -31,8 +31,8 @@ add(2, 3);
 
 
 
-### Todo
--[ ] Improve Docs
+### Todo 📕
+- [ ] Improve Docs
 
 ### Roadmap 🛣
 - [ ]  Publish to NPM
