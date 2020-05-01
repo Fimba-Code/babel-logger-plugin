@@ -1,7 +1,7 @@
 // @ts-nocheck
-import {traverse, parse} from '@babel/core';
-import * as t from '@babel/types';
-import generator from '@babel/generator';
+import { traverse, parse } from "@babel/core";
+import * as t from "@babel/types";
+import generator from "@babel/generator";
 
 const code = `
 function add(a, b) {
@@ -15,38 +15,37 @@ add(2, 3);
 
 const ast = parse(code);
 
-let hasLogID = false
+let hasLogID = false;
 
 const LoggerVisitor = {
-  ReturnStatement: (path) => {
+  ReturnStatement: (path: object) => {
     const identifierName = path.node.argument.name;
-    if(path.node.argument.type === 'Identifier' && hasLogID) {
-     
+    if (path.node.argument.type === "Identifier" && hasLogID) {
       path.replaceWithMultiple([
         t.identifier(`console.log('Final Result 😛 ==> ', ${identifierName})`),
-        t.identifier(`return ${identifierName}`)
+        t.identifier(`return ${identifierName}`),
       ]);
     }
   },
-  Identifier: (path) => {
-    if(path.isIdentifier({name: '$log'})) {
+  Identifier: (path: object) => {
+    if (path.isIdentifier({ name: "$log" })) {
       hasLogID = true;
       path.remove();
     }
   },
-  BinaryExpression: (path) => {
-    if(path.node.operator === '+') {
-      path.node.operator = '*'
+  BinaryExpression: (path: object) => {
+    if (path.node.operator === "+") {
+      path.node.operator = "*";
     }
-  }
-}
+  },
+};
 
-traverse(ast, { 
+traverse(ast, {
   enter: (path) => {
     path.traverse(LoggerVisitor);
-  }
+  },
 });
 
 const output = generator(ast, {}, code);
 const newCode = output.code;
-console.log({newCode: eval(newCode)})
+console.log({ newCode: eval(newCode) });
