@@ -1,5 +1,5 @@
 {
-  "name": "FloweryTightScreenscraper",
+  "name": "babel-fimba-plugin",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
@@ -16,5 +16,9 @@
     "@babel/parser": "^7.9.6",
     "@babel/types": "^7.9.6",
     "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@types/babel__core": "^7.1.7",
+    "ts-node": "^8.9.1"
   }
 }
