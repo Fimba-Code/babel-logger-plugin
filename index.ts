@@ -18,7 +18,7 @@ const ast = parse(code);
 let hasLogID = false;
 
 const LoggerVisitor = {
-  ReturnStatement: (path: object) => {
+  ReturnStatement: (path: t.Node) => {
     const identifierName = path.node.argument.name;
     if (path.node.argument.type === "Identifier" && hasLogID) {
       path.replaceWithMultiple([
@@ -27,15 +27,10 @@ const LoggerVisitor = {
       ]);
     }
   },
-  Identifier: (path: object) => {
+  Identifier: (path: t.Node) => {
     if (path.isIdentifier({ name: "$log" })) {
       hasLogID = true;
       path.remove();
-    }
-  },
-  BinaryExpression: (path: object) => {
-    if (path.node.operator === "+") {
-      path.node.operator = "*";
     }
   },
 };
@@ -48,4 +43,5 @@ traverse(ast, {
 
 const output = generator(ast, {}, code);
 const newCode = output.code;
-console.log({ newCode: eval(newCode) });
+
+eval(newCode);
