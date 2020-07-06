@@ -1,25 +1,19 @@
-### Babel Plugin 🔀
+# babel-logger-plugin 🔍
 
-Playing with Babel Plugins and trying to hackly replace the key `$log` with an actual `console.log` statement.
-
-Pair programming with: [Bruno Kiafuka](https://github.com/brunokiafuka)
-
-It converts this:
+This [babel](https://babeljs.io/) plugins hacks into your functions by using `$log` key and adds a `console.log()` statement with your return value. Here is how:
 
 ```js
-function add(a, b) {
+function sum(a, b) {
   $log;
   const result = a + b;
 
   return result;
 }
 add(2, 3);
-```
 
-Into this:
-
-```js
-function add(a, b) {
+   ↓ ↓ ↓ ↓ ↓ ↓
+ 
+function sum(a, b) {
   const result = a + b;
 
   console.log("Final Result 😛 ==> ", result);
@@ -29,27 +23,29 @@ function add(a, b) {
 add(2, 3);
 ```
 
-### Set up ⚙️
+## Installation
+```shell
+$ npm install @codefimba/babel-logger-plugin --save-dev
+or
+$ yarn add -D @codefimba/babel-logger-plugin
+```
 
-- Clone the repo
-- Navigate into your folder directory. `cd babel-fimba-plugin`
-- Run `yarn` to install dependencies
-- Run `yarn build` to run the project
+The solution requires you to have **babel** installed in your project.
 
-### Todo 📕
+## Usage
+Via `.babelrc` or `babel-loader`.
+```js
+{
+  plugins: ["@codefimba/babel-logger-plugin"]
+}
+```
 
-- [ ] Improve Docs
-- [ ] Add code linters
-- [ ] Write tests
-- [ ] Write production ready version
+## Contributing
+Pull requests are most welcome!
 
-### Roadmap 🛣
+## Authors
+- [Faustino Kialungila](https://github.com/Fausto95) - Inital code - [@Fausto95_](https://twitter.com/Fausto95)
+- [Bruno Kiafuka](https://github.com/brunokiafuka) - Inital code - [@bruno_kiafuka](https://twitter.com/bruno_kiafuka)
 
-- [ ] Publish to NPM
+See also the list of [contributors](https://github.com/Fimba-Code/babel-logger-plugin/graphs/contributors) who participated in this project.
 
-### Useful links
-
-- [Babel Handbook](https://github.com/jamiebuilds/babel-handbook)
-- [Abstract Syntax Trees (AST)](https://ruslanspivak.com/lsbasi-part7/)
-- [babel-plugin-macros-example](https://github.com/kentcdodds/babel-plugin-macros-example)
-- [AST Explorer](https://astexplorer.net/)
